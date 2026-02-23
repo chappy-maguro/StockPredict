@@ -1,0 +1,32 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    /**
+     * Run the migrations.
+     */
+    public function up(): void
+    {
+        Schema::create('simulated_trades', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('user_id')->constrained(); // どのユーザーか
+            $table->string('stock_code');               // 銘柄コード（例: 7203.T）
+            // ここに価格のカラムを追加します
+            $table->decimal('bought_price', 12, 2);      // 合計12桁、うち小数2桁
+            $table->integer('quantity');
+            $table->timestamps();
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     */
+    public function down(): void
+    {
+        Schema::dropIfExists('simulated_trades');
+    }
+};
