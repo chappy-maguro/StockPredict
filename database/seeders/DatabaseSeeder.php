@@ -17,9 +17,9 @@ class DatabaseSeeder extends Seeder
     {
         // User::factory(10)->create();
 
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
+        $this->call([
+                UserSeeder::class,           // 1. まず親（ユーザー）を作る
+                SimulatedTradeSeeder::class, // 2. 次に子（取引データ）を作る
         ]);
     }
 }
